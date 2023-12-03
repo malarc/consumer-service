@@ -1,0 +1,59 @@
+spring:
+  main:
+    banner-mode: CONSOLE
+  banner:
+    location: banner.txt
+  application:
+    name: LocationDataMaster
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false data:
+  kafka:
+    listener:
+      concurrency: 1
+      ack-mode: MANUAL_IMMEDIATE
+    auto:
+      create:
+        topics:
+          enable: true
+    #bootstrap-servers: localhost:29092
+    bootstrap-servers: pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
+    username: YGZWSL4IE7B7EUKG
+    password: yXBPPcK4ZIHRII0ybeGpFaXsLDJn8HBFHLnvgkJC8SApSQ46mhyR/NnOmbzVu0WF
+    #    properties:
+    #      saslRequired: true
+    #      ssl.endpoint.identification.algorithm: https
+    #      sasl.mechanism: PLAIN
+    #      request.timeout.ms: 20000
+    #      retry.backoff.ms: 500
+    #      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="YGZWSL4IE7B7EUKG" password="yXBPPcK4ZIHRII0ybeGpFaXsLDJn8HBFHLnvgkJC8SApSQ46mhyR/NnOmbzVu0WF";
+    #      basic.auth.credentials.source: USER_INFO
+    #      schema.registry.basic.auth.user.info: YGZWSL4IE7B7EUKG:yXBPPcK4ZIHRII0ybeGpFaXsLDJn8HBFHLnvgkJC8SApSQ46mhyR/NnOmbzVu0WF
+    #      schema.registry.url: https://pkc-lq8gm.westeurope.azure.confluent.cloud
+    producer:
+      producerLinger: "1"
+      producerTimeout: "30000"
+      producerAcksConfig: "all"
+      topic: apmm.locationref.topic.internal.any.v1
+
+
+azure:
+  mdoblob:
+    connectionString: DefaultEndpointsProtocol=https;AccountName=locationmasterdata;AccountKey=TRo2mejwbL11SzFMhE4l07S9g9ch8uD8drDnn60l4pUjB+o9d+iJ5qM1b7JQf8CGmEKMjX8pKBHM+ASteJv1lQ==;EndpointSuffix=core.windows.net
+    containerName: locationmasterdatacontainer
+    blobName: locationmasterdata
+
+
+producer-kafka-config:
+  bootstrap-servers: pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
+  username: YGZWSL4IE7B7EUKG
+  password: yXBPPcK4ZIHRII0ybeGpFaXsLDJn8HBFHLnvgkJC8SApSQ46mhyR/NnOmbzVu0WF
+  clientId: locationData
+  topic: apmm.locationref.topic.internal.any.v1
+
+logging.level.org.apache.kafka: DEBUG
+logging.level.io.confluent.kafka: DEBUG
+
+
+
+
