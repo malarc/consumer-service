@@ -1,5 +1,3 @@
-
-
 server:
   port: 8081
 
@@ -27,6 +25,15 @@ spring:
       max-poll-timeout: 5000
       heart-beat-interval-ms: 3000
       max-fetch-size-bytes: 2097164
+      group-id: lkc-0djrwp
+      auto-offset-reset: earliest
+
+  r2dbc:
+    url: r2dbc:postgresql://r2dbcserver.postgres.database.azure.com:5432/postgres?sslmode=require
+    username: superuser@r2dbcserver
+    password: Admin123
+    properties:
+      sslMode: REQUIRE
 
 consumer-kafka-config:
   bootstrap-servers: pkc-6ojv2.us-west4.gcp.confluent.cloud:9092
@@ -38,7 +45,15 @@ consumer-kafka-config:
 logging.level.org.apache.kafka: INFO
 logging.level.io.confluent.kafka: INFO
 
-spring.kafka.consumer.group-id: lkc-0djrwp
-spring.kafka.consumer.auto-offset-reset: earliest
+#spring.kafka.consumer.group-id: lkc-0djrwp
+#spring.kafka.consumer.auto-offset-reset: earliest
 spring.kafka.consumer.key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 spring.kafka.consumer.value-deserializer:  org.apache.kafka.common.serialization.StringDeserializer
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: DEBUG
+

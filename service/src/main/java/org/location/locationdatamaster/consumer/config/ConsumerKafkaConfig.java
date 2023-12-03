@@ -45,39 +45,17 @@ public class ConsumerKafkaConfig {
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-        // props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        //props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, "2097164");
-        //props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
-        //props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG,"3000");
         props.put("security.protocol", producerKafkaProperties.getSecurityProtocol());
         props.put("sasl.mechanism",producerKafkaProperties.getSaslMechanism());
         props.put("sasl.jaas.config", producerKafkaProperties.getLoginModule() + " required username=\""
                     + producerKafkaProperties.getUsername() + "\"" + " password=" + "\""
                     + producerKafkaProperties.getPassword() + "\" ;");
-/*            props.put("sasl.jaas.config","org.apache.kafka.common.security.plain.PlainLoginModule required username=\"YGZWSL4IE7B7EUKG\" \n" +
-                    "password=\"yXBPPcK4ZIHRII0ybeGpFaXsLDJn8HBFHLnvgkJC8SApSQ46mhyR/NnOmbzVu0WF\";");*/
 
         ReceiverOptions<String, String> basicReceiverOptions = ReceiverOptions.create(props);
         return basicReceiverOptions.subscription(Collections.singletonList(topic));
     }
 
 
-    /*private void addProducerProperties(Map<String, Object> properties) {
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-
-        ProducerKafkaProperties.Producer producerProperties = producerKafkaProperties.getProducer();
-        properties.put(ProducerConfig.LINGER_MS_CONFIG, producerProperties.getLinger());
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, producerProperties.getBatchSize());
-        properties.put(ProducerConfig.SEND_BUFFER_CONFIG, producerProperties.getBatchSize());
-        properties.put(ProducerConfig.ACKS_CONFIG, producerProperties.getAcksConfig());
-        properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, producerProperties.getTimeout());
-        properties.put(ProducerConfig.CONNECTIONS_MAX_IDLE_MS_CONFIG, producerProperties.getConnectionsMaxIdle());
-        properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, producerProperties.getMetadataMaxAge());
-        properties.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, producerProperties.getMaxRequestSize());
-        properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, producerProperties.getDeliveryTimeout());
-
-    }*/
 
     @Bean
     public ReactiveKafkaConsumerTemplate<String, String> reactiveKafkaConsumerTemplate(ReceiverOptions<String, String> kafkaReceiverOptions) {

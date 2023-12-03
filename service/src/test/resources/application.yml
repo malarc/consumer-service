@@ -5,9 +5,11 @@ spring:
     location: banner.txt
   application:
     name: LocationDataMaster
+  allow-bean-definition-overriding: true
+  lazy-initialization: true
   jackson:
     serialization:
-      FAIL_ON_EMPTY_BEANS: false data:
+      FAIL_ON_EMPTY_BEANS: false
   kafka:
     listener:
       concurrency: 1
